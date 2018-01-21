@@ -27,7 +27,7 @@ function easyInstall() {
 ) #> /dev/null 2>&1
 
 [ ! -d ~/.mfc-j825dw ] && (
-  cat <<EOFLINE
+  cat <<EOFPRINTER
 
     Must install printer
       download http://support.brother.com/g/b/downloadend.aspx?c=us&lang=en&prod=mfcj825dw_all&os=128&dlid=dlf006893_000&flang=4&type3=625
@@ -39,7 +39,7 @@ function easyInstall() {
       bash linux-brprinter-installer-2.1.1-1 MFC-J825DW
 
 
-EOFLINE
+EOFPRINTER
 )
 
 easyInstall openssh-server 
@@ -77,7 +77,24 @@ notInstalled atom-beta && (
   sudo apt install atom-beta
 )
 
-easyInstall docker
+notInstalled docker && (
+  sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+  sudo apt-add-repository 'deb https://apt.dockerproject.org/repo ubuntu-xenial main'
+  sudo apt update
+  sudo apt install linux-image-generic linux-image-extra-virtual
+  sudo apt install docker-engine
+  sudo usermod -a -G docker $USER
+cat <<EOFDOCKER
+
+   <<<< reboot required >>>>
+
+  docker run hello-world
+  docker run -p 80:80 nginx
+  docker run -d -p 80:80 nginx
+  docker run -it debian bash
+EOFDOCKER
+)
+
 (
   echo
   echo
