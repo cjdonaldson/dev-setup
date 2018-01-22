@@ -53,7 +53,9 @@ notInstalled git && (
   git config --global push.default simple
   git config --global user.email 'charles.j.donaldson@gmail.com'
   git config --global user.name 'Charles Donaldson'
-  git difftool --tool='vimdiff'
+  git config --global diff.tool 'vimdiff'
+  git config --global core.editor 'vim'
+  git config --global --add difftool.prompt false
 )
 easyInstall tig
 
