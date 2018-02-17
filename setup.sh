@@ -26,8 +26,9 @@ function easyInstall() {
   echo
 ) #> /dev/null 2>&1
 
+function ontime() {
 sudo apt-get remove mono-runtime-common gnome-orca ndiswrappe*
-
+sudo cp -v /usr/share/systemd/tmp.mount /etc/systemd/system/
 chmod -v 700 $HOME
 
 sudo cat <<EOFSWAPPINESS
@@ -37,7 +38,7 @@ vm.swappiness=1
 EOFSWAPPINESS >> /etc/sysctl.conf
 
 sudo ufw enable
-
+}
 
 
 [ ! -d ~/.mfc-j825dw ] && (
