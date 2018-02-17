@@ -26,6 +26,20 @@ function easyInstall() {
   echo
 ) #> /dev/null 2>&1
 
+sudo apt-get remove mono-runtime-common gnome-orca ndiswrappe*
+
+chmod -v 700 $HOME
+
+sudo cat <<EOFSWAPPINESS
+# Decrease swap usage to a more reasonable level
+# 10 for HD, 1 for SSD
+vm.swappiness=1
+EOFSWAPPINESS >> /etc/sysctl.conf
+
+sudo ufw enable
+
+
+
 [ ! -d ~/.mfc-j825dw ] && (
   cat <<EOFPRINTER
 
